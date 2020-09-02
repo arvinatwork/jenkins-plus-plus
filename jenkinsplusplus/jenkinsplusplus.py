@@ -4,7 +4,6 @@ from requests.auth import HTTPBasicAuth
 
 """ JenkinsPlusPlus Custom Urls """
 COMPUTERS_URL = 'computer/api/json'
-BUILDS_ONGOING = 'computer/api/json?tree=computer[executors[currentExecutable[url]],oneOffExecutors[currentExecutable[url]]]&xpath=//url&wrapper=builds'
 BUILD_DURATION_INFO = '{build_url}/api/json?tree=timestamp,estimatedDuration,fullDisplayName,building,url'
 BUILDS_ONGOING= 'computer/api/json?tree=computer[executors[currentExecutable[*]]]'
 LABEL_NODES = 'label/{label_name}/api/json'
@@ -20,10 +19,6 @@ class JenkinsPlusPlus:
 
         if user is not None and token is not None:
             self.auth = HTTPBasicAuth(user.encode('utf-8'), token.encode('utf-8'))
-
-    def get_version(self):
-        # TODO to be implemented
-        pass
 
     def get_computers(self):
         url = self._build_url(COMPUTERS_URL)
